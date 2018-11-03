@@ -18,16 +18,19 @@ $pt = mysqli_fetch_array($result);
 if (isset($_POST['submit'])) {
 	$title = $_POST['title'];
 	$photo = $_FILES['photo'];
-	move_uploaded_file($photo['tmp_name'], "admin/uploads/".$photo['name']);
+	move_uploaded_file($photo['tmp_name'], "uploads/".$photo['name']);
    	$content = $_POST['content'];
 	$description = $_POST['description'];
 	$keyword = $_POST['keyword'];
+	$folder = $_POST['folder'];
     $sql = 'update posts set 
 		    title="'.$title.'", 
 			photo="http://truonggiang.com/admin/uploads/'.$photo['name'].'",
 		    content="'.$content.'",
 		    description="'.$description.'",
-		    keyword="'.$keyword.'" where id='.$id;
+		    keyword="'.$keyword.'",
+			folder="'.$folder.'"
+			where id='.$id;
 	$result = mysqli_query($conn, $sql);
 	if ($result) {
 		header('Location: listpost.php');
@@ -62,7 +65,28 @@ ob_get_flush();
 				<div class="form-group">
                   <label class="control-label">Keyword</label>
                   <input class="form-control" type="text" placeholder="Enter Keyword" value="<?php echo $pt['keyword'];?>" name="keyword">
-                </div>     
+                </div> 
+				<div class="form-group">
+					<label class="control-label">Thư Mục</label>           
+					<div class="form-control">
+					<select name="folder" class="input-text input-select">
+                        <?php    
+						echo '<option value="'.$pt['folder'].'">'.$pt['folder'].'</option>';
+						?>
+                            <?php
+                  
+						$sql = 'select * from folder';
+						$result = mysqli_query($conn, $sql);
+						$i= 1;
+
+						while($pt = mysqli_fetch_assoc($result)){ 
+							$i++ ;
+                            echo '<option value="'.$pt['folder'].'">'.$pt['folder'].'</option>';
+						}
+                            ?>
+				</select>
+				</div>
+				</div>
             </div>
             <div class="tile-footer">
               <button class="btn btn-primary" type="submit" name="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Đăng Bài</button>&nbsp;&nbsp;&nbsp;

@@ -10,6 +10,7 @@ include('header.php');
 </head>
 
 <body>
+	<script src="ckeditor/ckeditor.js"></script>
 	<?php
         if (isset($_POST['submit'])) {
             //nếu submit rồi thì lấy các thông tin đã nhập
@@ -62,7 +63,7 @@ include('header.php');
                 </div>
                 <div class="form-group">
                   <label class="control-label">Nội dung</label>
-                  <textarea class="form-control" rows="4" placeholder="Enter your content" name="content"></textarea>
+                  <textarea class="form-control" rows="4" placeholder="Enter your content" name="content" id="content"></textarea>
                 </div>
 				<div class="form-group">
                   <label class="control-label">Description</label>
@@ -76,7 +77,7 @@ include('header.php');
 					<label class="control-label">Thư Mục</label>           
 					<div class="form-control">
 					<select name="folder" class="input-text input-select">
-                            <option value="" value="<?php if($a==0){echo $_POST['birthday_day'];} ?>"hidden></option>
+                            <option value="" value="<?php if($a==0){echo $_POST['folder'];} ?>"hidden></option>
                             <?php
                   
 						$sql = 'select * from folder';
@@ -100,6 +101,9 @@ include('header.php');
         </div>
 	</div>
 </form>
+	<script>
+	CKEDITOR.replace('content');
+	</script>
 	<?php
 include('footer.php');
 ?>

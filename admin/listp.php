@@ -29,14 +29,14 @@
 					$sql = 'select * from posts order by id ASC'; // không có where vì mình cần lấy tất cả
 					$result = mysqli_query($conn, $sql);
 					if (mysqli_num_rows($result)) {
-						$i = 1;
 						while($user = mysqli_fetch_assoc($result)) {
+							$ct=substr($user['content'],0,34);
 							echo '<tr>';
 							echo '<td>'.($i++).'</td>';
 							echo '<td>'.$user['title'].'</td>';
 							$imgData = $user['photo'];  
     						echo '<td>'."<img src=\"$imgData\" />".'</td>';
-							echo '<td>'.$user['content'].'</td>';
+							echo '<td>'."$ct".'</td>';
 							echo '<td>'.$user['description'].'</td>';	
 							echo '<td>'.$user['keyword'].'</td>';										
 							echo '<td><a href="/admin/editpost.php?id='.$user['id'].'">Edit</a></td>';

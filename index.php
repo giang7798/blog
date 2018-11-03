@@ -1,5 +1,6 @@
 <?php
 include 'header.php';
+include 'slider.php';
 ?>
 
 		<!-- Content
@@ -29,7 +30,7 @@ include 'header.php';
 								<a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" alt="Standard Post with Image" <?php echo "<img src=\"$imgData\" />";?> </a>
 							</div>
 							<div class="entry-title">
-								<h2><a href="blog-single.html"><?php echo $pt['title'];?></a></h2>
+								<h2><a <?php echo 'href=/content.php?id='.$pt['id'];?>><?php echo $pt['title'];?></a></h2>
 							</div>
 							<ul class="entry-meta clearfix">
 								<li><i class="icon-calendar3"></i> 10th February 2014</li>

@@ -25,20 +25,6 @@ include "admin/connectdb.php";
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="SemiColonWeb" />
 
-	<!-- Stylesheets
-	============================================= -->
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-
 	<!-- Document Title
 	============================================= -->
 	<title>Home - Blog Layout | Canvas</title>
@@ -120,35 +106,4 @@ include "admin/connectdb.php";
 
 		</header><!-- #header end -->
 
-		<section id="slider" class="slider-element slider-parallax swiper_wrapper clearfix">
-			<div class="swiper-container swiper-parent">
-				<div class="swiper-wrapper">
-			<?php
-			 	$sql = 'select * from slider';
-				$result = mysqli_query($conn, $sql);
-				while($pt = mysqli_fetch_assoc($result)) {
-					if($pt['hidden']!=0){
-				$imgData = $pt['picture'];
-				
-			?>
-					<div class="swiper-slide dark" style="background-image: <?php echo 'url('.$imgData.');'?>">
-						<div class="container clearfix">
-							<div class="slider-caption slider-caption-center">
-								<h2 data-caption-animate="fadeInUp"><?php echo $pt['title']; ?></h2>
-								<p class="d-none d-sm-block" data-caption-animate="fadeInUp" data-caption-delay="200"><?php echo $pt['content']?></p>
-							</div>
-						</div>
-					</div>
-				
-			
-				<?php
-					}
-				}
-					?>
-				</div>
-				<div class="slider-arrow-left"><i class="icon-angle-left"></i></div>
-				<div class="slider-arrow-right"><i class="icon-angle-right"></i></div>
-				<div class="slide-number"><div class="slide-number-current"></div><span>/</span><div class="slide-number-total"></div></div>
-			</div>
-
-		</section>
+		
