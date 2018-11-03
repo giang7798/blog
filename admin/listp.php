@@ -13,6 +13,7 @@
 						<th>Content</th>
 						<th>Describe</th>
 						<th>Keyword</th>
+						<th>Thư mục</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
@@ -31,15 +32,17 @@
 					if (mysqli_num_rows($result)) {
 						$i=1;
 						while($user = mysqli_fetch_assoc($result)) {
-							$ct=substr($user['content'],0,34);
+							$ct=substr($user['content'],0,40);
+							$ds=substr($user['description'],0,40);
 							echo '<tr>';
 							echo '<td>'.($i++).'</td>';
 							echo '<td>'.$user['title'].'</td>';
 							$imgData = $user['photo'];  
     						echo '<td>'."<img src=\"$imgData\" />".'</td>';
 							echo '<td>'."$ct".'</td>';
-							echo '<td>'.$user['description'].'</td>';	
-							echo '<td>'.$user['keyword'].'</td>';										
+							echo '<td>'.$ds.'</td>';	
+							echo '<td>'.$user['keyword'].'</td>';
+							echo '<td>'.$user['folder'].'</td>';	
 							echo '<td><a href="/admin/editpost.php?id='.$user['id'].'">Edit</a></td>';
                             echo '<td><a href="/admin/deletepost.php?id='.$user['id'].'">Delete</a></td>';
 							echo '</tr>';

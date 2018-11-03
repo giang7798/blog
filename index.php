@@ -27,7 +27,7 @@ include 'slider.php';
 						?>
 						<div class="entry clearfix">
 							<div class="entry-image">
-								<a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" alt="Standard Post with Image" <?php echo "<img src=\"$imgData\" />";?> </a>
+								<a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" alt="Standard Post with Image" width="50px" <?php echo " src=\"$imgData\" ";?> </a>
 							</div>
 							<div class="entry-title">
 								<h2><a <?php echo 'href=/content.php?id='.$pt['id'];?>><?php echo $pt['title'];?></a></h2>
