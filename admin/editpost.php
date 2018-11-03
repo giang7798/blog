@@ -40,6 +40,7 @@ if (isset($_POST['submit'])) {
 }
 ob_get_flush();
 ?>
+<script src="ckeditor/ckeditor.js" ></script>
 <form action="" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-12">
@@ -56,7 +57,7 @@ ob_get_flush();
                 </div>
                 <div class="form-group">
                   <label class="control-label">Nội dung</label>
-                  <textarea class="form-control" rows="4" placeholder="Enter your content" name="content"><?php echo $pt['content'];?></textarea>
+                  <textarea class="form-control" rows="4" placeholder="Enter your content" name="content" id="content"><?php echo $pt['content'];?></textarea>
                 </div>
 				<div class="form-group">
                   <label class="control-label">Description</label>
@@ -92,6 +93,9 @@ ob_get_flush();
               <button class="btn btn-primary" type="submit" name="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Đăng Bài</button>&nbsp;&nbsp;&nbsp;
 			<a class="btn btn-secondary" href="#"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
             </div>
+			  <script>
+			  CKEDITOR.replace('content');
+			  </script>
           </div>
         </div>
 	</div>

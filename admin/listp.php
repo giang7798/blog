@@ -29,6 +29,7 @@
 					$sql = 'select * from posts order by id ASC'; // không có where vì mình cần lấy tất cả
 					$result = mysqli_query($conn, $sql);
 					if (mysqli_num_rows($result)) {
+						$i=1;
 						while($user = mysqli_fetch_assoc($result)) {
 							$ct=substr($user['content'],0,34);
 							echo '<tr>';
