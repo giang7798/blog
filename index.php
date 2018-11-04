@@ -33,11 +33,10 @@ include 'slider.php';
 								<h2><a <?php echo 'href=/content.php?id='.$pt['id'];?>><?php echo $pt['title'];?></a></h2>
 							</div>
 							<ul class="entry-meta clearfix">
-								<li><i class="icon-calendar3"></i> 10th February 2014</li>
+								<li><i class="icon-calendar3"></i><?php echo $pt['time'];?></li>
 								<li><a href="#"><i class="icon-user"></i> <?php echo $pt['user'];?></a></li>
 								<li><i class="icon-folder-open"></i> <a href="#"><?php echo $pt['folder'];?></a></li>
 								<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13 Comments</a></li>
-								<li><a href="#"><i class="icon-camera-retro"></i></a></li>
 							</ul>
 							<div class="entry-content">
 								<p><?php echo $pt['description'];?></p>

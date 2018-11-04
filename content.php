@@ -33,16 +33,18 @@ $page_title = 'Chỉnh Sửa Bài Viết';
 $id = $_GET['id'];
 if (!$id) {
 	//nếu id không tồn tại
-	header('Location: listpost.php');
+	header('Location: index.php');
 }
 $sql = 'select * from posts where id='.$id;
 $result = mysqli_query($conn, $sql);
 if (!mysqli_num_rows($result)) {
 	//nếu id không tồn tại
-	header('Location: listposts.php');
+	header('Location: index.php');
 }
 $pt = mysqli_fetch_array($result);
 	$img = $pt['photo'];
+	$folder = $pt['folder'];
+ob_get_flush();
 	?>
 
 	<!-- Document Wrapper
@@ -75,11 +77,10 @@ $pt = mysqli_fetch_array($result);
 								<!-- Entry Meta
 								============================================= -->
 								<ul class="entry-meta clearfix">
-									<li><i class="icon-calendar3"></i> 10th July 2014</li>
+									<li><i class="icon-calendar3"></i> <?php echo $pt['time'];?></li>
 									<li><a href="#"><i class="icon-user"></i> <?php echo $pt['user'];?></a></li>
 									<li><i class="icon-folder-open"></i> <a href="#"><?php echo $pt['folder'];?></a></li>
 									<li><a href="#"><i class="icon-comments"></i> 43 Comments</a></li>
-									<li><a href="#"><i class="icon-camera-retro"></i></a></li>
 								</ul><!-- .entry-meta end -->
 
 								<!-- Entry Image
@@ -242,8 +243,8 @@ $pt = mysqli_fetch_array($result);
 									</li>
                                     <?php
 									$sql = 'select * from comment order by id ASC ';
-									$res = mysqli_query($conn, $sql);
-									while($cm = mysqli_fetch_assoc($res)){
+									$result = mysqli_query($conn, $sql);
+									while($cm = mysqli_fetch_assoc($result)){
 									?>	
 									<li class="comment byuser comment-author-_smcl_admin even thread-odd thread-alt depth-1" id="li-comment-2">
 
@@ -279,7 +280,7 @@ $pt = mysqli_fetch_array($result);
 									
 
 								</ol><!-- .commentlist end -->
-                               <?php include 'comment.php';?>
+								
 							</div><!-- #comments end -->
 
 						</div>
@@ -293,19 +294,24 @@ $pt = mysqli_fetch_array($result);
 							<div class="widget clearfix">
 
 								
-								<h4>Recent Posts</h4>
+								<h4>Related Posts</h4>
 								<div id="post-list-footer">
-								<?php
-								$sql = 'select * from posts order by id DESC';
-								$result = mysqli_query($conn, $sql);
-									$i=1;
-								while($pt = mysqli_fetch_assoc($result)){
-									if($i<4){
-										$i++;
-								
-								$imgData = $pt['photo'];  
-								?>
-
+				<?php
+					//lấy tất cả các user có trong bảng users
+					//câu query để lấy
+					$sql = 'SELECT *
+							FROM folder
+							INNER JOIN posts
+							ON folder.folder = posts.folder
+							WHERE posts.folder = \''.$folder.'\' order by posts.id DESC'; 
+					$result1 = mysqli_query($conn, $sql);
+					if (mysqli_num_rows($result1)) {
+						$i=1;
+						while($pt = mysqli_fetch_assoc($result1)) {
+							$i++;
+							if($i<5){
+							$imgData = $pt['photo'];
+				?>
 									<div class="spost clearfix">
 										<div class="entry-image">
 											<a href="#" class="nobg"><img <?php echo "src=\"$imgData\"";?> alt=""></a>
@@ -315,12 +321,13 @@ $pt = mysqli_fetch_array($result);
 												<h4><a href="#"><?php echo $pt['title'];?></a></h4>
 											</div>
 											<ul class="entry-meta">
-												<li>10th July 2014</li>
+												<li><?php echo $pt['time'];?></li>
 											</ul>
 										</div>
 									</div>
 									<?php
 											}
+						}
 								}
 									?>
 								</div>

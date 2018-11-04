@@ -76,12 +76,10 @@ include "admin/connectdb.php";
 						$sql = 'select * from folder';
 						$result = mysqli_query($conn, $sql);
 						$i= 1;
-
 						while($pt = mysqli_fetch_assoc($result)){ 
 							if($pt['hidden']!=0){
-
 						?>
-							<li><a href="#"><div><?php echo $pt['folder']?></div></a></li>
+							<li class="current"><?php echo '<a href="/category.php?id='.$pt['id'].'">';?><div><?php echo $pt['folder']?></div></a></li>
 						<?php
 							}
 						}

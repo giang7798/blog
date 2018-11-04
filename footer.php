@@ -68,36 +68,28 @@
 
 								<div id="post-list-footer">
 									<div class="spost clearfix">
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li>10th July 2014</li>
-											</ul>
-										</div>
-									</div>
+										<?php
+										$sql = 'select * from posts order by id DESC';
+										$result = mysqli_query($conn, $sql);
+											$i=1;
+										while($pt = mysqli_fetch_assoc($result)){
+											if($i<4){
+												$i++;
 
-									<div class="spost clearfix">
+										$imgData = $pt['photo'];  
+										?>
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#">Elit Assumenda vel amet dolorum quasi</a></h4>
+												<h4><a href="#"><?php echo $pt['title'];?></a></h4>
 											</div>
 											<ul class="entry-meta">
-												<li>10th July 2014</li>
+												<li><?php echo $pt['time'];?></li>
 											</ul>
 										</div>
-									</div>
-
-									<div class="spost clearfix">
-										<div class="entry-c">
-											<div class="entry-title">
-												<h4><a href="#">Debitis nihil placeat, illum est nisi</a></h4>
-											</div>
-											<ul class="entry-meta">
-												<li>10th July 2014</li>
-											</ul>
-										</div>
+																			<?php
+											}
+								}
+									?>
 									</div>
 								</div>
 							</div>

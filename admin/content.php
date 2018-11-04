@@ -10,8 +10,9 @@ include('header.php');
 </head>
 
 <body>
-	<script src="ckeditor/ckeditor.js"></script> <!--//thêm bộ gõ văn bản cho bài viết-->
+	<script src="ckeditor/ckeditor.js"></script>
 	<?php
+	date_default_timezone_set('Asia/Ho_Chi_Minh');
         if (isset($_POST['submit'])) {
             //nếu submit rồi thì lấy các thông tin đã nhập
             $title = $_POST['title'];
@@ -23,18 +24,19 @@ include('header.php');
 			$id = $_SESSION['id'];
 			$user = $_SESSION['user'];
 			$folder = $_POST['folder'];
+			$date = date('d-m-Y');
 			
             if (!$content || !$title || !$description) {
                 echo 'Bạn nhập thiếu thông tin!';
             } else {
 				
                 //nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
-                $sql = 'Insert into posts(user_id, user, title, photo, content, description, keyword, folder) values("'.$id.'","'.$user.'","'.$title.'","
+                $sql = 'Insert into posts(user_id, user, title, photo, content, description, keyword, folder, time) values("'.$id.'","'.$user.'","'.$title.'","
 				     http://truonggiang.com/admin/uploads/'.$photo['name'].'", "'
                     .$content.'","'
                     .$description.'", "'
                     .$keyword.'", "'
-					.$folder.'")';
+					.$folder.'","'.$date.'")';
                 //thực thi câu lệnh SQL
 				$sql1 = 'select * from posts where title="'.$title.'"';
 				$result = mysqli_query($conn, $sql1);
@@ -63,7 +65,7 @@ include('header.php');
                 </div>
                 <div class="form-group">
                   <label class="control-label">Nội dung</label>
-                  <textarea class="form-control" rows="4" placeholder="Enter your content" name="content" id="content"></textarea>
+                  <textarea class="form-control" rows="4" placeholder="Enter your content" name="content"></textarea>
                 </div>
 				<div class="form-group">
                   <label class="control-label">Description</label>
@@ -77,13 +79,12 @@ include('header.php');
 					<label class="control-label">Thư Mục</label>           
 					<div class="form-control">
 					<select name="folder" class="input-text input-select">
-                            <option value="" value="<?php if($a==0){echo $_POST['folder'];} ?>"hidden></option>
+                            <option value="" value="<?php if($a==0){echo $_POST['birthday_day'];} ?>"hidden></option>
                             <?php
                   
 						$sql = 'select * from folder';
 						$result = mysqli_query($conn, $sql);
 						$i= 1;
-
 						while($pt = mysqli_fetch_assoc($result)){ 
 							$i++ ;
                             echo '<option value="'.$pt['folder'].'">'.$pt['folder'].'</option>';
