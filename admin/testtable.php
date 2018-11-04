@@ -1,42 +1,58 @@
+<?php
+$page_title = 'bảng';
+include 'header.php';
+?>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">	
 <div class="row">
-    <body>
-	<div class="col-md-12">
+        <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
               <table class="table table-hover table-bordered" id="sampleTable">
-                <thead>
+			   		<?php
+					$id = $_GET['id'];
+					if (!$id) {
+						//nếu id không tồn tại
+						header('Location: listfolder.php');
+					}
+					$sql = 'select * from folder where id='.$id;
+					$result = mysqli_query($conn, $sql);
+					if (!mysqli_num_rows($result)) {
+						//nếu id không tồn tại
+						header('Location: listfolder.php');
+					}
+					$user = mysqli_fetch_array($result);
+					$folder = $user['folder'];
+				    echo $folder;
+					?>  
+				  <thead>
 					<tr>
-						<td>STT</td>
-						<td>Folder</td>
-						<td>Bài Viết</td>
-						<td>Sửa</td>
-						<td>Xóa</td>
-						<td>Ẩn</td>
-						<td>Hiện</td>
-						<td>Trạng Thái</td>
+						<td>Title</td>
+						<td>Xem</td>
+						  
 					</tr>
+					<style>
+						img{
+							width: 100px;
+						}
+					</style>
                 </thead>
                 <tbody>
-                 <?php
+				<?php
 					//lấy tất cả các user có trong bảng users
 					//câu query để lấy
-					$sql = 'select * from folder'; // không có where vì mình cần lấy tất cả
-					$result = mysqli_query($conn, $sql);
-					if (mysqli_num_rows($result)) {
-						$i = 1;
-						while($fol = mysqli_fetch_assoc($result)) {
+					$sql = 'SELECT *
+							FROM folder
+							INNER JOIN posts
+							ON folder.folder = posts.folder
+							WHERE posts.folder = \''.$folder.'\''; 
+					$result1 = mysqli_query($conn, $sql);
+					if (mysqli_num_rows($result1)) {
+						while($fol = mysqli_fetch_assoc($result1)) {
 							echo '<tr>';
-							echo '<td>'.($i++).'</td>';
-							echo '<td>'.$fol['folder'].'</td>';	
-							echo '<td><a href="/admin/testtable.php?id='.$fol['id'].'">Show</a></td>';
-							echo '<td><a href="/admin/editfolder.php?id='.$fol['id'].'">Edit</a></td>';
-                            echo '<td><a href="/admin/deletefolder.php?id='.$fol['id'].'">Delete</a></td>';
-							echo '<td><a href="/admin/hiddenp.php?id='.$fol['id'].'">Ẩn</a></td>';
-							echo '<td><a href="/admin/appearp.php?id='.$fol['id'].'">Hiện</a></td>';
-							if($fol['hidden']==0){echo '<td>'.'Ẩn'.'</td>';}else{echo '<td>'.'Hiện'.'</td>';}
-							echo '</tr>';		
+							echo '<td>'.$fol['title'].'</td>';
+							echo '<td><a href="/content.php?id='.$fol['id'].'">xem</a></td>';						
+							echo '</tr>';
 						}
 					}
 				?>
@@ -47,7 +63,8 @@
         </div>
       </div>
     </main>
- <script src="js/jquery-3.2.1.min.js"></script>
+<!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
@@ -68,5 +85,14 @@
       	ga('create', 'UA-72504830-1', 'auto');
       	ga('send', 'pageview');
       }
-</script>
-</body>   
+    </script>
+</body><!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+</body>
+</html>

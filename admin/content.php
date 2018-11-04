@@ -10,7 +10,7 @@ include('header.php');
 </head>
 
 <body>
-	<script src="ckeditor/ckeditor.js"></script>
+	<script src="ckeditor/ckeditor.js"></script> <!--//thêm bộ gõ văn bản cho bài viết-->
 	<?php
         if (isset($_POST['submit'])) {
             //nếu submit rồi thì lấy các thông tin đã nhập

@@ -242,8 +242,8 @@ $pt = mysqli_fetch_array($result);
 									</li>
                                     <?php
 									$sql = 'select * from comment order by id ASC ';
-									$result = mysqli_query($conn, $sql);
-									while($cm = mysqli_fetch_assoc($result)){
+									$res = mysqli_query($conn, $sql);
+									while($cm = mysqli_fetch_assoc($res)){
 									?>	
 									<li class="comment byuser comment-author-_smcl_admin even thread-odd thread-alt depth-1" id="li-comment-2">
 
@@ -279,7 +279,7 @@ $pt = mysqli_fetch_array($result);
 									
 
 								</ol><!-- .commentlist end -->
-
+                               <?php include 'comment.php';?>
 							</div><!-- #comments end -->
 
 						</div>

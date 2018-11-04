@@ -129,14 +129,28 @@
 						<div class="widget subscribe-widget clearfix">
 							<h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
 							<div class="widget-subscribe-form-result"></div>
-							<form id="widget-subscribe-form" action="include/subscribe.php" role="form" method="post" class="nobottommargin">
+							<?php
+							     if(isset($_POST['submit'])){
+								    $mail = $_POST['email'];	
+							  		if (!$mail) {
+                						echo 'Bạn nhập thiếu thông tin!';
+								    }else {
+										$sql = 'inserts into mailsb(mail)values("'.$mail.'")';
+										$result = mysqli_query($conn, $sql);
+										if($result){
+											echo 'Cảm ơn bạn đã đăng kí';
+										}
+									}
+								 }
+							?>
+							<form  action="" method="post" >
 								<div class="input-group divcenter">
 									<div class="input-group-prepend">
 										<div class="input-group-text"><i class="icon-email2"></i></div>
 									</div>
-									<input type="email" id="widget-subscribe-form-email" name="widget-subscribe-form-email" class="form-control required email" placeholder="Enter your Email">
+									<input type="email" name="email" class="form-control required email" placeholder="Enter your Email">
 									<div class="input-group-append">
-										<button class="btn btn-success" type="submit">Subscribe</button>
+										<button class="btn btn-success" type="submit" name="submit">Subscribe</button>
 									</div>
 								</div>
 							</form>
