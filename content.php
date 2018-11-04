@@ -280,7 +280,7 @@ ob_get_flush();
 									
 
 								</ol><!-- .commentlist end -->
-								
+								<?php include 'comment.php'; ?>
 							</div><!-- #comments end -->
 
 						</div>
