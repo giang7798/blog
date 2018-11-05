@@ -19,12 +19,12 @@ include 'slider.php';
 					<!-- Posts
 					============================================= -->
 					<div id="posts">
-	   					<?php
-						$sql = 'select * from posts order by id DESC';
-						$result = mysqli_query($conn, $sql);
-						while($pt = mysqli_fetch_assoc($result)){ 
-                        $imgData = $pt['photo'];  
-						?>
+<?php
+$sql = 'select * from posts order by id DESC';
+$result = mysqli_query($conn, $sql);
+while($pt = mysqli_fetch_assoc($result)){ 
+$imgData = $pt['photo'];  
+?>
 						<div class="entry clearfix">
 							<div class="entry-image">
 								<a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" alt="Standard Post with Image" width="50px" <?php echo " src=\"$imgData\" ";?> </a>

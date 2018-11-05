@@ -106,10 +106,12 @@ ob_get_flush();
 									<div class="si-share noborder clearfix">
 										<span>Share this Post:</span>
 										<div>
+											<div <?php echo 'data-href=/content.php?id='.$pt['id'];?> >
 											<a href="#" class="social-icon si-borderless si-facebook">
 												<i class="icon-facebook"></i>
 												<i class="icon-facebook"></i>
 											</a>
+											</div>
 											<a href="#" class="social-icon si-borderless si-twitter">
 												<i class="icon-twitter"></i>
 												<i class="icon-twitter"></i>
@@ -132,25 +134,10 @@ ob_get_flush();
 											</a>
 										</div>
 									</div><!-- Post Single - Share End -->
+									<div class="fb-share-button" <?php echo 'data-href=/content.php?id='.$pt['id'];?> data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
 
 								</div>
 							</div><!-- .entry end -->
-
-							<!-- Post Navigation
-							============================================= -->
-							<div class="post-navigation clearfix">
-
-								<div class="col_half nobottommargin">
-									<a href="#">&lArr; This is a Standard post with a Slider Gallery</a>
-								</div>
-
-								<div class="col_half col_last tright nobottommargin">
-									<a href="#">This is an Embedded Audio Post &rArr;</a>
-								</div>
-
-							</div><!-- .post-navigation end -->
-
-							<div class="line"></div>
 
 							<!-- Post Author Info
 							============================================= -->

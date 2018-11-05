@@ -122,18 +122,19 @@
 							<h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
 							<div class="widget-subscribe-form-result"></div>
 							<?php
+							ob_start();
 							     if(isset($_POST['submit'])){
-								    $mail = $_POST['email'];	
-							  		if (!$mail) {
-                						echo 'Bạn nhập thiếu thông tin!';
-								    }else {
-										$sql = 'inserts into mailsb(mail)values("'.$mail.'")';
-										$result = mysqli_query($conn, $sql);
-										if($result){
-											echo 'Cảm ơn bạn đã đăng kí';
+								    $email = $_POST['email'];	
+										$sql = 'Insert into mailsb(email)values("'.$email.'")';
+		                                $sql1 = 'select * from mailsb where email="'.$email.'"';
+										$result = mysqli_query($conn, $sql1);
+										if (mysqli_num_rows($result)){
+										}
+										else if (mysqli_query($conn, $sql)) {  //biến $conn được khai báo trong file connectdb
+											echo 'Đăng bài thành công!';
 										}
 									}
-								 }
+							ob_end_flush();
 							?>
 							<form  action="" method="post" >
 								<div class="input-group divcenter">
