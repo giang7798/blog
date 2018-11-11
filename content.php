@@ -46,6 +46,13 @@ $pt = mysqli_fetch_array($result);
 	$folder = $pt['folder'];
 ob_get_flush();
 	?>
+	<?php
+	//lấy số lượng người comment
+							$sql = mysqli_query($conn,'SELECT * FROM comment WHERE post_id="'.$id.'"');
+							$total = mysqli_num_rows($sql);
+                            mysqli_free_result($sql);
+echo $total;
+	?>
 
 	<!-- Document Wrapper
 	============================================= -->
@@ -80,7 +87,7 @@ ob_get_flush();
 									<li><i class="icon-calendar3"></i> <?php echo $pt['time'];?></li>
 									<li><a href="#"><i class="icon-user"></i> <?php echo $pt['user'];?></a></li>
 									<li><i class="icon-folder-open"></i> <a href="#"><?php echo $pt['folder'];?></a></li>
-									<li><a href="#"><i class="icon-comments"></i> 43 Comments</a></li>
+									<li><a href="#"><i class="icon-comments"></i> <?php echo $total; ?></a></li>
 								</ul><!-- .entry-meta end -->
 
 								<!-- Entry Image
@@ -96,7 +103,17 @@ ob_get_flush();
 									<!-- Tag Cloud
 									============================================= -->
 									<div class="tagcloud clearfix bottommargin">
-										<a <?php echo 'href=/content.php?id='.$pt['id'];?>><?php echo $pt['keyword'];?></a>
+								    <?php
+									$sql = 'SELECT * FROM articlestags INNER JOIN tags on articlestags.tag_id = tags.id WHERE articlestags.article_id = "'.$id.'"';
+									$result = mysqli_query($conn, $sql);
+									while($tag = mysqli_fetch_assoc($result)){
+									?>
+									
+										<a <?php echo 'href=/content.php?id='.$pt['id'];?>><?php echo $tag['name'];?></a>
+									
+									<?php
+									}
+										?>
 									</div><!-- .tagcloud end -->
 
 									<div class="clear"></div>
@@ -105,34 +122,6 @@ ob_get_flush();
 									============================================= -->
 									<div class="si-share noborder clearfix">
 										<span>Share this Post:</span>
-										<div>
-											<div <?php echo 'data-href=/content.php?id='.$pt['id'];?> >
-											<a href="#" class="social-icon si-borderless si-facebook">
-												<i class="icon-facebook"></i>
-												<i class="icon-facebook"></i>
-											</a>
-											</div>
-											<a href="#" class="social-icon si-borderless si-twitter">
-												<i class="icon-twitter"></i>
-												<i class="icon-twitter"></i>
-											</a>
-											<a href="#" class="social-icon si-borderless si-pinterest">
-												<i class="icon-pinterest"></i>
-												<i class="icon-pinterest"></i>
-											</a>
-											<a href="#" class="social-icon si-borderless si-gplus">
-												<i class="icon-gplus"></i>
-												<i class="icon-gplus"></i>
-											</a>
-											<a href="#" class="social-icon si-borderless si-rss">
-												<i class="icon-rss"></i>
-												<i class="icon-rss"></i>
-											</a>
-											<a href="#" class="social-icon si-borderless si-email3">
-												<i class="icon-email3"></i>
-												<i class="icon-email3"></i>
-											</a>
-										</div>
 									</div><!-- Post Single - Share End -->
 									<div class="fb-share-button" <?php echo 'data-href=/content.php?id='.$pt['id'];?> data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Chia sẻ</a></div>
 
@@ -141,24 +130,31 @@ ob_get_flush();
 
 							<!-- Post Author Info
 							============================================= -->
+  			<?php
+				$sql = 'SELECT * FROM `pageusers` 
+				JOIN users 
+				ON users.id = pageusers.user_id order by pageusers.id DESC';
+					$result = mysqli_query($conn, $sql);
+					$user = mysqli_fetch_assoc($result);
+			?>
 							<div class="card">
-								<div class="card-header"><strong>Posted by <a href="#">John Doe</a></strong></div>
+								<div class="card-header"><strong>Posted by <a href="#"><?php echo $user['username'];?></a></strong></div>
 								<div class="card-body">
 									<div class="author-image">
-										<img src="images/author/1.jpg" alt="" class="rounded-circle">
+										<img width="50px" src="<?php echo $user['picture'];?>" alt="" class="rounded-circle">
 									</div>
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eveniet, eligendi et nobis neque minus mollitia sit repudiandae ad repellendus recusandae blanditiis praesentium vitae ab sint earum voluptate velit beatae alias fugit accusantium laboriosam nisi reiciendis deleniti tenetur molestiae maxime id quaerat consequatur fugiat aliquam laborum nam aliquid. Consectetur, perferendis?
+									<?php echo $user['content']; ?>
 								</div>
 							</div><!-- Post Single - Author End -->
 
 							<div class="line"></div>
 
-
 							<!-- Comments
 							============================================= -->
+
 							<div id="comments" class="clearfix">
 
-								<h3 id="comments-title"><span>3</span> Comments</h3>
+								<h3 id="comments-title"><span><?php echo $total;?></span> Comments</h3>
 
 								<!-- Comments List
 								============================================= -->
@@ -229,7 +225,7 @@ ob_get_flush();
 
 									</li>
                                     <?php
-									$sql = 'select * from comment order by id ASC ';
+									$sql = 'select * from comment where post_id="'.$id.'" ';
 									$result = mysqli_query($conn, $sql);
 									while($cm = mysqli_fetch_assoc($result)){
 									?>	
@@ -250,7 +246,7 @@ ob_get_flush();
 
 											<div class="comment-content clearfix">
 
-												<div class="comment-author"><a href='http://themeforest.net/user/semicolonweb' rel='external nofollow' class='url'><?php echo $cm['name']; ?></a><span><a href="#" title="Permalink to this comment">April 25, 2012 at 1:03 am</a></span></div>
+												<div class="comment-author"><a href='http://themeforest.net/user/semicolonweb' rel='external nofollow' class='url'><?php echo $cm['name']; ?></a><span><a href="#" title="Permalink to this comment"><?php echo $cm['day']; ?></a></span></div>
 
 												<p><?php echo $cm['comment'] ?></p>
 
@@ -322,43 +318,6 @@ ob_get_flush();
 							</div>
 
 							<div class="widget clearfix">
-
-								<h4>Portfolio Carousel</h4>
-								<div id="oc-portfolio-sidebar" class="owl-carousel carousel-widget" data-items="1" data-margin="10" data-loop="true" data-nav="false" data-autoplay="5000">
-
-									<div class="oc-item">
-										<div class="iportfolio">
-											<div class="portfolio-image">
-												<a href="#">
-													<img src="images/portfolio/4/3.jpg" alt="Mac Sunglasses">
-												</a>
-												<div class="portfolio-overlay">
-													<a href="http://vimeo.com/89396394" class="center-icon" data-lightbox="iframe"><i class="icon-line-play"></i></a>
-												</div>
-											</div>
-											<div class="portfolio-desc center nobottompadding">
-												<h3><a href="portfolio-single-video.html">Mac Sunglasses</a></h3>
-												<span><a href="#">Graphics</a>, <a href="#">UI Elements</a></span>
-											</div>
-										</div>
-									</div>
-
-									<div class="oc-item">
-										<div class="iportfolio">
-											<div class="portfolio-image">
-												<a href="portfolio-single.html">
-													<img src="images/portfolio/4/1.jpg" alt="Open Imagination">
-												</a>
-												<div class="portfolio-overlay">
-													<a href="images/blog/full/1.jpg" class="center-icon" data-lightbox="image"><i class="icon-line-plus"></i></a>
-												</div>
-											</div>
-											<div class="portfolio-desc center nobottompadding">
-												<h3><a href="portfolio-single.html">Open Imagination</a></h3>
-												<span><a href="#">Media</a>, <a href="#">Icons</a></span>
-											</div>
-										</div>
-									</div>
 
 								</div>
 

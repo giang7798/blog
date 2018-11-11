@@ -4869,7 +4869,13 @@ body.device-touch.device-xs .portfolio-notitle .portfolio-overlay { display: non
 .entry-image img {
 	display: block;
 	position: relative;
-	width: 100%;
+	width: 60%;
+	height: auto;
+}
+.1 img{
+		display: block;
+	position: relative;
+	width: 60%;
 	height: auto;
 }
 

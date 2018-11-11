@@ -16,6 +16,8 @@ if (!mysqli_num_rows($result)) {
 }
 $pt = mysqli_fetch_array($result);
 if (isset($_POST['submit'])) {
+	//xóa dữ liệu trên table articletags
+	mysqli_query($conn,"delete from articlestags where article_id = $id ");
 	$title = $_POST['title'];
 	$photo = $_FILES['photo'];
 	move_uploaded_file($photo['tmp_name'], "uploads/".$photo['name']);
@@ -37,6 +39,32 @@ if (isset($_POST['submit'])) {
 	} else {
 		echo 'Sửa thất bại.';
 	}
+			$arrTags = explode(",", $_POST['keyword']);
+			foreach ($arrTags as $tag)
+			{
+			//Hàm trim để cắt bỏ khoảng trắng
+			$tag = trim($tag);
+
+			//Lấy id của tag có tên là $tag, nếu ko có thì thêm mới
+			$result = mysqli_query($conn, 'select id from tags where name= "'.$tag.'"');
+			if (mysqli_num_rows($result) > 0)
+			{
+				while($i = mysqli_fetch_assoc($result)){
+					$idTag = $i['id'];
+				}
+			}
+			else
+			{
+				$sql2 = 'insert into tags(name) values ("'.$tag.'")';
+				if( mysqli_query($conn,$sql2)){
+				$idTag = mysqli_insert_id($conn);
+				 }
+			}
+
+			//Insert dữ liệu vào table Articles_Tags
+			mysqli_query($conn,'insert into articlestags(article_id, tag_id) values("'.$id.'","'.$idTag.'")');
+
+}
 }
 ob_get_flush();
 ?>

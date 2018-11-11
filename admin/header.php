@@ -34,6 +34,7 @@ $(document).ready(function(){
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	  
   </head>
 	<?php
 	//kiểm tra xem đã đăng nhập chưa nếu không sẽ trỏ về trang login
@@ -96,7 +97,7 @@ $(document).ready(function(){
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
             <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-user fa-lg"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="page-user.php"><i class="fa fa-user fa-lg"></i> Profile</a></li>
             <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
         </li>
@@ -105,9 +106,15 @@ $(document).ready(function(){
     <!-- Sidebar menu-->
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
-      <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+		<style>
+			#69{
+				width: 48px;
+				height: 48px;
+			}
+		</style>
+		<div class="app-sidebar__user"><img id="69" class="app-sidebar__user-avatar" src="<?php echo $_SESSION['picture']; ?>" alt="User Image" style="width: 48px;">
         <div>
-          <p class="app-sidebar__user-name">John Doe</p>
+          <p class="app-sidebar__user-name"><?php echo $_SESSION['user'];?></p>
           <p class="app-sidebar__user-designation">Frontend Developer</p>
         </div>
       </div>
@@ -144,6 +151,13 @@ $(document).ready(function(){
           </li>
       </ul>
     </aside>
+	  <?php
+	       $a=0;
+	  if(!isset($page_title)){
+    echo "";
+}
+	       else{
+	  		?>
 	   <main class="app-content">
       <div class="app-title">
         <div>
@@ -155,3 +169,6 @@ $(document).ready(function(){
           <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
         </ul>
       </div>
+		   <?php
+		   }
+				?>

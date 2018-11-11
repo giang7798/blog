@@ -1,4 +1,6 @@
 <?php
+		date_default_timezone_set('Asia/Ho_Chi_Minh');
+		$postid = $_GET['id'];
         if (isset($_POST['submit'])) {
 			//check captcha
 			$ch = curl_init();
@@ -17,12 +19,13 @@ curl_close ($ch);
 				$email = $_POST['email'];
 				$website = $_POST['url'];
 				$comment = $_POST['comment'];
+				$date = date('d,m,Y - H:i');
 				if (!$name || !$email || !$comment) {
 					echo 'Bạn nhập thiếu thông tin!';
 				} else {
 
 					//nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
-					$sql = 'Insert into comment(name, email, website, comment) values("'.$name.'","'.$email.'","'.$website.'","'.$comment.'")';
+					$sql = 'Insert into comment(post_id,name, email, website, comment,day) values("'.$postid.'","'.$name.'","'.$email.'","'.$website.'","'.$comment.'","'.$date.'")';
 					//thực thi câu lệnh SQL
 					if (mysqli_query($conn, $sql)) {  //biến $conn được khai báo trong file connectdb
 						echo 'Đăng bài thành công!';

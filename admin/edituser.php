@@ -16,13 +16,16 @@ if (!mysqli_num_rows($result)) {
 $user = mysqli_fetch_array($result);
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
+	$picture = $_FILES['picture'];
+	move_uploaded_file($picture['tmp_name'], "uploads/".$picture['name']);
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $birthday = $_POST['birthday'];
     $gender = $_POST['gender'];
     $address = $_POST['address'];
     $sql = 'update users set 
-		    email="'.$email.'", 
+		    email="'.$email.'",
+			picture="http://truonggiang.com/admin/uploads/'.$picture['name'].'",
 		    name="'.$name.'",
 		    phone="'.$phone.'",
 		    birthday="'.$birthday.'",
@@ -46,13 +49,17 @@ if (isset($_POST['submit'])) {
   <div class="tile">
     <h3 class="tile-title">Register</h3>
     <div class="tile-body">
-      <form class="form-horizontal" method="post" action="">
+      <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
         <div class="form-group row">
           <label class="control-label col-md-3">Username</label>
           <div class="col-md-8">
             <input class="form-control col-md-8" type="text" placeholder="Username" name="username" value="<?php echo $user['username']; ?>" disabled>
           </div>
         </div>
+		<div class="form-group">
+		  <label class="control-label">Picture</label>
+		  <input class="form-control" type="file" name="picture">
+		</div>
         <div class="form-group row">
           <label class="control-label col-md-3">Email</label>
           <div class="col-md-8">

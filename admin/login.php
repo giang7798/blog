@@ -41,6 +41,7 @@ include('connectdb.php');
 					$user = mysqli_fetch_array($result);	
 			        $_SESSION['user'] = $user['username'];
 					$_SESSION['id'] = $user['id'];
+					$_SESSION['picture'] = $user['picture'];
 					header('Location:index.php');
                 }else{
 					echo 'sai tài khoản hoặc mật khẩu';

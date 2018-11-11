@@ -27,7 +27,7 @@
                  <?php
 					//lấy tất cả các user có trong bảng users
 					//câu query để lấy
-					$sql = 'select * from posts order by id ASC'; // không có where vì mình cần lấy tất cả
+					$sql = 'select * from posts order by id DESC'; // không có where vì mình cần lấy tất cả
 					$result = mysqli_query($conn, $sql);
 					if (mysqli_num_rows($result)) {
 						$i=1;

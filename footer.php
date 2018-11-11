@@ -119,7 +119,7 @@
 						</div>
 
 						<div class="widget subscribe-widget clearfix">
-							<h5><strong>Subscribe</strong> to Our Newsletter to get Important News, Amazing Offers &amp; Inside Scoops:</h5>
+							<h5><strong>Đăng kí</strong> để nhận các bài viết với nhất &amp; Hay nhất:</h5>
 							<div class="widget-subscribe-form-result"></div>
 							<?php
 							ob_start();
@@ -234,7 +234,7 @@
 
 						<div class="clear"></div>
 
-						<i class="icon-envelope2"></i> info@canvas.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +91-11-6541-6369 <span class="middot">&middot;</span> <i class="icon-skype2"></i> CanvasOnSkype
+						<i class="icon-envelope2"></i> presidentboy9877@gmail.com <span class="middot">&middot;</span> <i class="icon-headphones"></i> +0368425125 <span class="middot">&middot;</span> <i class="icon-skype2"></i> TruongGiangOnSkype
 					</div>
 
 				</div>

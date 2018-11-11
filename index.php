@@ -19,12 +19,21 @@ include 'slider.php';
 					<!-- Posts
 					============================================= -->
 					<div id="posts">
+						<!--//lấy dữ liệu danh sách bài viết-->
 <?php
-$sql = 'select * from posts order by id DESC';
-$result = mysqli_query($conn, $sql);
-while($pt = mysqli_fetch_assoc($result)){ 
-$imgData = $pt['photo'];  
+	$sql = 'select * from posts order by id DESC';
+	$result = mysqli_query($conn, $sql);
+	while($pt = mysqli_fetch_assoc($result)){ 
+	$imgData = $pt['photo'];  
 ?>
+<?php
+	//lấy số lượng người comment
+	$sql = mysqli_query($conn,'SELECT * FROM comment WHERE post_id="'.$pt['id'].'"');
+	$total = mysqli_num_rows($sql);
+	mysqli_free_result($sql);
+echo $total;
+?>
+						
 						<div class="entry clearfix">
 							<div class="entry-image">
 								<a href="images/portfolio/full/17.jpg" data-lightbox="image"><img class="image_fade" alt="Standard Post with Image" width="50px" <?php echo " src=\"$imgData\" ";?> </a>
@@ -36,7 +45,7 @@ $imgData = $pt['photo'];
 								<li><i class="icon-calendar3"></i><?php echo $pt['time'];?></li>
 								<li><a href="#"><i class="icon-user"></i> <?php echo $pt['user'];?></a></li>
 								<li><i class="icon-folder-open"></i> <a href="#"><?php echo $pt['folder'];?></a></li>
-								<li><a href="blog-single.html#comments"><i class="icon-comments"></i> 13 Comments</a></li>
+								<li><a href="blog-single.html#comments"><i class="icon-comments"></i> <?php echo $total;?> Comments</a></li>
 							</ul>
 							<div class="entry-content">
 								<p><?php echo $pt['description'];?></p>

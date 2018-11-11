@@ -45,35 +45,7 @@ include('header.php');
 				}
                 else if (mysqli_query($conn, $sql)) {  //biến $conn được khai báo trong file connectdb
                     echo 'Đăng bài thành công!';
-					$idArticle = mysqli_insert_id($conn);
                 }
-							// thêm tags cho  bài viết
-	        $arrTags = explode(",", $_POST['keyword']);
-			foreach ($arrTags as $tag)
-			{
-			//Hàm trim để cắt bỏ khoảng trắng
-			$tag = trim($tag);
-
-			//Lấy id của tag có tên là $tag, nếu ko có thì thêm mới
-			$result = mysqli_query($conn, 'select id from tags where name= "'.$tag.'"');
-			if ($i = mysqli_num_rows($result) > 0)
-			{
-				while($i = mysqli_fetch_assoc($result)){
-					$idTag = $i['id'];
-				}
-			}
-			else
-			{
-				$sql2 = 'insert into tags(name) values ("'.$tag.'")';
-				if( mysqli_query($conn,$sql2)){
-				$idTag = mysqli_insert_id($conn);
-				 }
-			}
-
-			//Insert dữ liệu vào table Articles_Tags
-			mysqli_query($conn,'insert into articlestags(article_id, tag_id) values("'.$idArticle.'","'.$idTag.'")');
-
-}
 				}
             }
 	?>

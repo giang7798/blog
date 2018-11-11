@@ -6,7 +6,7 @@ include('header.php');
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>Thêm Tài Khoản</title>
 </head>
 
 <body>
@@ -20,6 +20,8 @@ include('header.php');
             //nếu submit rồi thì lấy các thông tin đã nhập
             $username = $_POST['username'];
             $password = $_POST['password'];
+			$picture = $_FILES['picture'];
+			move_uploaded_file($picture['tmp_name'], "uploads/".$picture['name']);
             $email = $_POST['email'];
             $name = $_POST['name'];
             $phone = $_POST['phone'];
@@ -33,9 +35,10 @@ include('header.php');
                 echo 'Bạn nhập thiếu thông tin!';
             } else {
                 //nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
-                $sql = 'insert into users(username, password, email, name, phone, birthday, gender, address) values ("'
+                $sql = 'insert into users(username, password, picture, email, name, phone, birthday, gender, address) values ("'
                     .$username.'", "'
-                    .md5($password).'", "' //mã hóa password trước khi chèn vào CSDL để tăng bảo mật
+                    .md5($password).'", "
+				     http://truonggiang.com/admin/uploads/'.$picture['name'].'", "'
                     .$email.'", "'
                     .$name.'", "'
                     .$phone.'", "'
@@ -57,7 +60,7 @@ include('header.php');
             }
         }
         ?>
-	<form action="" method="post">
+	<form action="" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-12">
           <div class="tile">
@@ -71,6 +74,10 @@ include('header.php');
 				<div class="form-group">
                   <label class="control-label">Password</label>
                   <input class="form-control" type="password" placeholder="Enter password" name="password">
+                </div>
+				<div class="form-group">
+                  <label class="control-label">Picture</label>
+                  <input class="form-control" type="file" name="picture">
                 </div>
 				<div class="form-group">
                   <label class="control-label">Email</label>

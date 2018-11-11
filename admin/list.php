@@ -7,6 +7,7 @@
 					<tr>
 						<td>STT</td>
 						<td>Username</td>
+						<td>Picture</td>
 						<td>Email</td>
 						<td>Name</td>
 						<td>Phone</td>
@@ -16,6 +17,11 @@
 						<td>Edit</td>
 						<td>Delete</td>
 					</tr>
+					<style>
+						img {
+							width: 100px;
+						}
+					</style>
                 </thead>
                 <tbody>
                  <?php
@@ -29,13 +35,15 @@
 							echo '<tr>';
 							echo '<td>'.($i++).'</td>';
 							echo '<td>'.$user['username'].'</td>';
+							$imgData = $user['picture'];  
+    						echo '<td>'."<img src=\"$imgData\" />".'</td>';
 							echo '<td>'.$user['email'].'</td>';
 							echo '<td>'.$user['name'].'</td>';
 							echo '<td>'.$user['phone'].'</td>';
 							echo '<td>'.$user['birthday'].'</td>';
 							echo '<td>'.$user['gender'].'</td>';
 							echo '<td>'.$user['address'].'</td>';
-							echo '<td><a href="/edituser.php?id='.$user['id'].'">Edit</a></td>';
+							echo '<td><a href="./edituser.php?id='.$user['id'].'">Edit</a></td>';
                             echo '<td><a href="/admin/deleteuser.php?id='.$user['id'].'">Delete</a></td>';
 							echo '</tr>';
 						}
