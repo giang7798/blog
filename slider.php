@@ -8,7 +8,6 @@
 				while($pt = mysqli_fetch_assoc($result)) {
 					if($pt['hidden']!=0){
 				$imgData = $pt['picture'];
-	            ob_end_flush();	
 			?>
 					<div class="swiper-slide dark" style="background-image: <?php echo 'url('.$imgData.');'?>">
 						<div class="container clearfix">

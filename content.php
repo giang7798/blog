@@ -85,9 +85,9 @@ echo $total;
 								============================================= -->
 								<ul class="entry-meta clearfix">
 									<li><i class="icon-calendar3"></i> <?php echo $pt['time'];?></li>
-									<li><a href="#"><i class="icon-user"></i> <?php echo $pt['user'];?></a></li>
-									<li><i class="icon-folder-open"></i> <a href="#"><?php echo $pt['folder'];?></a></li>
-									<li><a href="#"><i class="icon-comments"></i> <?php echo $total; ?></a></li>
+									<li><a ><i class="icon-user"></i> <?php echo $pt['user'];?></a></li>
+									<li><i class="icon-folder-open"></i> <?php echo '<a href="/category.php?id='.$pt['id_folder'].'">';?><?php echo $pt['folder'];?></a></li>
+									<li><a><i class="icon-comments"></i> <?php echo $total; ?></a></li>
 								</ul><!-- .entry-meta end -->
 
 								<!-- Entry Image
@@ -160,7 +160,7 @@ echo $total;
 								============================================= -->
 								<ol class="commentlist clearfix">
 
-									<li class="comment even thread-even depth-1" id="li-comment-1">
+									<!--<li class="comment even thread-even depth-1" id="li-comment-1">
 
 										<div id="comment-1" class="comment-wrap clearfix">
 
@@ -223,7 +223,7 @@ echo $total;
 
 										</ul>
 
-									</li>
+									</li>-->
                                     <?php
 									$sql = 'select * from comment where post_id="'.$id.'" ';
 									$result = mysqli_query($conn, $sql);
@@ -321,24 +321,6 @@ echo $total;
 
 								</div>
 
-
-							</div>
-
-							<div class="widget clearfix">
-
-								<h4>Tag Cloud</h4>
-								<div class="tagcloud">
-									<a href="#">general</a>
-									<a href="#">videos</a>
-									<a href="#">music</a>
-									<a href="#">media</a>
-									<a href="#">photography</a>
-									<a href="#">parallax</a>
-									<a href="#">ecommerce</a>
-									<a href="#">terms</a>
-									<a href="#">coupons</a>
-									<a href="#">modern</a>
-								</div>
 
 							</div>
 

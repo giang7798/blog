@@ -48,13 +48,18 @@
 								<h4>Blogroll</h4>
 
 								<ul>
-									<li><a href="http://codex.wordpress.org/">Documentation</a></li>
-									<li><a href="http://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li>
-									<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
-									<li><a href="http://wordpress.org/support/">Support Forums</a></li>
-									<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
-									<li><a href="http://wordpress.org/news/">WordPress Blog</a></li>
-									<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+						<?php
+						$sql = 'select * from folder';
+						$result = mysqli_query($conn, $sql);
+						$i= 1;
+						while($pt = mysqli_fetch_assoc($result)){ 
+							if($pt['hidden']!=0){
+						?>
+									<li><a<?php echo '<a href="/category.php?id='.$pt['id'].'">';?><?php echo $pt['folder']?></a></li>
+						<?php
+							}
+						}
+						?>
 								</ul>
 
 							</div>
@@ -80,7 +85,7 @@
 										?>
 										<div class="entry-c">
 											<div class="entry-title">
-												<h4><a href="#"><?php echo $pt['title'];?></a></h4>
+												<h4><a <?php echo 'href=/content.php?id='.$pt['id'];?>><?php echo $pt['title'];?></a></h4>
 											</div>
 											<ul class="entry-meta">
 												<li><?php echo $pt['time'];?></li>

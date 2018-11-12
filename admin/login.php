@@ -74,18 +74,69 @@ include('connectdb.php');
                   <input type="checkbox"><span class="label-text">Stay Signed in</span>
                 </label>
               </div>
-              <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+              <p class="semibold-text mb-2"><a href="forgotpass.php" >Forgot Password ?</a></p>
             </div>
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block" type="submit" name="submit" ><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
           </div>
         </form>
-        <form class="forget-form" action="resetpass.php">
+		  <?php
+		
+        if (isset($_POST['submit'])) {
+			$a = 1;
+
+    function createRandomPassword() {
+
+        $chars = "abcdefghijkmnopqrstuvwxyz023456789";
+        srand((double)microtime()*1000000);
+        $i = 0;
+        $pass = '' ;
+
+        while ($i <= 7) {
+            $num = rand() % 33;
+            $tmp = substr($chars, $num, 1);
+            $pass = $pass . $tmp;
+            $i++;
+        }
+
+        return $pass;
+
+    }
+
+    // Usage
+   $password = createRandomPassword();
+            //nếu submit rồi thì lấy các thông tin đã nhập
+            $email = $_POST['email'];
+			$result = mysqli_query($conn, 'select id from users where email= "'.$email.'"');
+				if(mysqli_num_rows($result)<1){
+					echo 'tài khoản mail không tồn tại';
+				}else{
+				while($i = mysqli_fetch_assoc($result)){
+					$id = $i['id'];				
+				}
+			echo $id;
+					$pa = md5($password);
+                //thực thi câu lệnh SQL
+				$result = mysqli_query($conn, "update users set password='$pa' where id= $id");
+			if ($result) {
+				echo 'đổi pass thành công xem lại email.';
+				$result = mysqli_query($conn, 'select id from forgotpass where email= "'.$email.'"');
+					if(mysqli_num_rows($result)<1){	
+					mysqli_query($conn,'insert into forgotpass(email, password)values("'.$email.'","'.$password.'")');
+					}else{
+					mysqli_query($conn,"update forgotpass set password='$password' where email = '$email'");
+					}
+			
+		}
+		}
+		}
+        ?>
+        <form class="forget-form" action="" method="post">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
           <div class="form-group">
             <label class="control-label">EMAIL</label>
-            <input class="form-control" type="text" placeholder="email">
+            <input class="form-control" type="email" placeholder="email" name="email">
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw" type="submit" name="submit"></i>RESET</button>

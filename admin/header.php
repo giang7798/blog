@@ -5,6 +5,14 @@ include('connectdb.php');
 <!DOCTYPE html>
 <html lang="en">
   <head>
+	  	  <style>
+	#linkpage{
+		  z-index: 1;
+  color: #FFF;
+  background-color: #009688;
+  border-color: #009688;
+	}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -96,7 +104,7 @@ $(document).ready(function(){
         <!-- User Menu-->
         <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
           <ul class="dropdown-menu settings-menu dropdown-menu-right">
-            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+            <li><a class="dropdown-item" href="cpass.php"><i class="fa fa-cog fa-lg"></i> password</a></li>
             <li><a class="dropdown-item" href="page-user.php"><i class="fa fa-user fa-lg"></i> Profile</a></li>
             <li><a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
           </ul>
@@ -128,7 +136,7 @@ $(document).ready(function(){
 		  </li>
 		  <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Quản Lý Bài Viết</span><i class="treeview-indicator fa fa-angle-right"></i></a>
           <ul class="treeview-menu">
-			 <li><a class="treeview-item" href="listpost.php"><i class="icon fa fa-circle-o"></i>Bài Viết</a></li>
+			 <li><a class="treeview-item" href="listpost.php?id=1"><i class="icon fa fa-circle-o"></i>Bài Viết</a></li>
              <li><a class="treeview-item" href="content.php"><i class="icon fa fa-circle-o"></i>Thêm Bài Viết</a></li>
           </ul>
           </li>

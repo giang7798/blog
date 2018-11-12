@@ -25,18 +25,20 @@ include('header.php');
 			$user = $_SESSION['user'];
 			$folder = $_POST['folder'];
 			$date = date('d-m-Y');
-			
+					$result = mysqli_query($conn,'select id from folder where folder = "'.$folder.'"');
+					$pt = mysqli_fetch_assoc($result);
+					$idfolder = $pt['id'];
             if (!$content || !$title || !$description) {
                 echo 'Bạn nhập thiếu thông tin!';
             } else {
 				
                 //nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
-                $sql = 'Insert into posts(user_id, user, title, photo, content, description, keyword, folder, time) values("'.$id.'","'.$user.'","'.$title.'","
+                $sql = 'Insert into posts(user_id, user, title, photo, content, description, keyword, folder, time, id_folder) values("'.$id.'","'.$user.'","'.$title.'","
 				     http://truonggiang.com/admin/uploads/'.$photo['name'].'", "'
                     .$content.'","'
                     .$description.'", "'
                     .$keyword.'", "'
-					.$folder.'","'.$date.'")';
+					.$folder.'","'.$date.'","'.$idfolder.'")';
                 //thực thi câu lệnh SQL
 				$sql1 = 'select * from posts where title="'.$title.'"';
 				$result = mysqli_query($conn, $sql1);

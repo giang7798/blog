@@ -4,7 +4,15 @@ include "admin/connectdb.php";
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 <head>
-
+		  	  <style>
+	#linkpage{
+		  z-index: 1;
+  color: #FFF;
+  background-color: #009688;
+  border-color: #009688;
+	}
+</style>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="author" content="SemiColonWeb" />
 
@@ -18,6 +26,7 @@ include "admin/connectdb.php";
 	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
 	<link rel="stylesheet" href="css/animate.css" type="text/css" />
 	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+	<link rel="stylesheet" href="css/css/lato-font.css" type="text/css" />
 
 	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -84,10 +93,10 @@ include "admin/connectdb.php";
 						$sql = 'select * from folder';
 						$result = mysqli_query($conn, $sql);
 						$i= 1;
-						while($pt = mysqli_fetch_assoc($result)){ 
-							if($pt['hidden']!=0){
+						while($folder = mysqli_fetch_assoc($result)){ 
+							if($folder['hidden']!=0){
 						?>
-							<li class="current"><?php echo '<a href="/category.php?id='.$pt['id'].'">';?><div><?php echo $pt['folder']?></div></a></li>
+							<li class="current"><?php echo '<a href="/category.php?id='.$folder['id'].'&page=1">';?><div><?php echo $folder['folder']?></div></a></li>
 						<?php
 							}
 						}

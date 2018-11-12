@@ -1,3 +1,16 @@
+<?php
+$sotin1trang = 4;
+$current_page = isset($_GET['id']) ? $_GET['id'] : 1;
+if(isset($_GET["id"])){
+$trang = $_GET["id"];
+}else{
+	echo 'không có trang này';
+	exit();
+}
+?>
+<?php
+$from = ($trang -1)* $sotin1trang;
+?>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">	
 <div class="row">
@@ -27,7 +40,7 @@
                  <?php
 					//lấy tất cả các user có trong bảng users
 					//câu query để lấy
-					$sql = 'select * from posts order by id DESC'; // không có where vì mình cần lấy tất cả
+					$sql = "select * from posts order by id DESC limit $from,$sotin1trang"; // không có where vì mình cần lấy tất cả
 					$result = mysqli_query($conn, $sql);
 					if (mysqli_num_rows($result)) {
 						$i=1;
@@ -49,6 +62,42 @@
 						}
 					}
 				?>
+					<!-- 'start hiện nút phân trang' -->
+<div class="col-sm-12 col-md-7">
+	<div class="dataTables_paginate paging_simple_numbers" id="sampleTable_paginate">
+		<ul class="pagination">
+			<?php
+				$x = mysqli_query($conn, "select id from posts");
+				$tongsotin = mysqli_num_rows($x);
+				$sotrang = ceil($tongsotin/$sotin1trang);
+			?>
+<?php
+					// nếu current_page > 1 và total_page > 1 mới hiển thị nút prev
+if ($current_page > 1 && $sotrang > 1){
+    echo '<li class="paginate_button page-item previous" id="sampleTable_previous"><a aria-controls="sampleTable" data-dt-idx="0" tabindex="0" class="page-link" href="listpost.php?id='.($current_page-1).'">Prev</a>  </li>';
+}
+ 
+// Lặp khoảng giữa
+for ($i = 1; $i <= $sotrang; $i++){
+    // Nếu là trang hiện tại thì hiển thị thẻ span
+    // ngược lại hiển thị thẻ a
+    if ($i == $current_page){
+        echo '<a id="linkpage" class="page-link">'.$i.'</a>  ';
+    }
+    else{
+        echo '<li class="paginate_button page-item "><a aria-controls="sampleTable" data-dt-idx="1" tabindex="0" class="page-link" href="listpost.php?id='.$i.'">'.$i.'</a> </li> ';
+    }
+}
+ 
+// nếu current_page < $total_page và total_page > 1 mới hiển thị nút prev
+if ($current_page < $sotrang && $sotrang > 1){
+    echo '<li class="paginate_button page-item next " id="sampleTable_next"><a aria-controls="sampleTable" data-dt-idx="7" tabindex="0" class="page-link" href="listpost.php?id='.($current_page+1).'">Next</a> </li> ';
+}
+					?>
+				</ul>
+			</div>
+					</div>
+			<!-- 'end hiện nút phân trang' -->
                 </tbody>
               </table>
             </div>

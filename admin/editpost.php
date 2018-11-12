@@ -6,13 +6,13 @@ include "header.php";
 $id = $_GET['id'];
 if (!$id) {
 	//nếu id không tồn tại
-	header('Location: listpost.php');
+	header('Location: listpost.php?id=1');
 }
 $sql = 'select * from posts where id='.$id;
 $result = mysqli_query($conn, $sql);
 if (!mysqli_num_rows($result)) {
 	//nếu id không tồn tại
-	header('Location: listposts.php');
+	header('Location: listposts.php?id=1');
 }
 $pt = mysqli_fetch_array($result);
 if (isset($_POST['submit'])) {
@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 			where id='.$id;
 	$result = mysqli_query($conn, $sql);
 	if ($result) {
-		header('Location: listpost.php');
+		header('Location: listpost.php?id=1');
 	} else {
 		echo 'Sửa thất bại.';
 	}

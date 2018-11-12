@@ -46,10 +46,10 @@ include('header.php');
                     .$gender.'", "'
                     .$address.'")';
                 //thực thi câu lệnh SQL
-				$sql1 = 'select * from users where username="'.$username.'"';
+				$sql1 = 'select * from users where username="'.$username.'" or email = "'.$email.'"';
 				$result = mysqli_query($conn, $sql1);
 				if (mysqli_num_rows($result)){
-					echo 'tài khoản đã tồn tại mời bạn đăng nhập một tài khoản khác';
+					echo 'tài khoản hoặc email đã tồn tại mời bạn đăng nhập một tài khoản khác';
 					$a=0;
 				}
                 else if (mysqli_query($conn, $sql)) {  //biến $conn được khai báo trong file connectdb

@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 	mysqli_query($conn, "delete from articlestags where article_id = $id");
 	//xóa bảng comment của bài viết
 	mysqli_query($conn, "delete from comment where post_id = $id");
-	header('Location: listpost.php');
+	header('Location: listpost.php?id=1');
 }
 
 ?>
