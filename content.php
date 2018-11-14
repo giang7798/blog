@@ -99,7 +99,7 @@ echo $total;
 								<!-- Entry Content
 								============================================= -->
 								<div class="entry-content notopmargin">
-                                    <?php echo $pt['content'];?>
+                                    <?php echo html_entity_decode($pt['content']);?>
 									<!-- Tag Cloud
 									============================================= -->
 									<div class="tagcloud clearfix bottommargin">

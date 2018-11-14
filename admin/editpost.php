@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     $sql = 'update posts set 
 		    title="'.$title.'", 
 			photo="http://truonggiang.com/admin/uploads/'.$photo['name'].'",
-		    content="'.$content.'",
+		    content="'.htmlentities($content).'",
 		    description="'.$description.'",
 		    keyword="'.$keyword.'",
 			folder="'.$folder.'"

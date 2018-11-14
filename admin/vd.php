@@ -17,8 +17,8 @@ include('header.php');
             $content = $_POST['content'];
 				
                 //nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
-                $sql = 'Insert into vd(content) values("'.$content.'")';
-                //thực thi câu lệnh SQL
+                $sql = 'Insert into vd(content) values("'.htmlentities($content).'")';
+                //thực thi câu lệnh SQL 
 				if (mysqli_query($conn, $sql)) {  //biến $conn được khai báo trong file connectdb
                     echo 'Đăng bài thành công!';
                 }

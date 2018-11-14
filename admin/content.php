@@ -35,7 +35,7 @@ include('header.php');
                 //nếu đã đầy đủ thông tin cần thiết, tiến hành chèn vào CSDL
                 $sql = 'Insert into posts(user_id, user, title, photo, content, description, keyword, folder, time, id_folder) values("'.$id.'","'.$user.'","'.$title.'","
 				     http://truonggiang.com/admin/uploads/'.$photo['name'].'", "'
-                    .$content.'","'
+                    .htmlentities($content).'","'
                     .$description.'", "'
                     .$keyword.'", "'
 					.$folder.'","'.$date.'","'.$idfolder.'")';
